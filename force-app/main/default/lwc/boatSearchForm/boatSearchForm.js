@@ -1,23 +1,14 @@
 // imports
-import {
-  APPLICATION_SCOPE,
-  createMessageContext,
-  MessageContext,
-  publish,
-  releaseMessageContext,
-  subscribe,
-  unsubscribe
-} from "lightning/messageService";
-import BOATMC from "@salesforce/messageChannel/BoatMessageChannel__c";
-import { LightningElement, wire } from "lwc";
+import { LightningElement, wire, track, api } from "lwc";
 import getBoatTypes from "@salesforce/apex/BoatDataService.getBoatTypes";
 
 export default class BoatSearchForm extends LightningElement {
+  @api 
   selectedBoatTypeId = "";
 
   // Private
   error = undefined;
-  searchOptions;
+  @track searchOptions;
 
   // Wire a custom Apex method
   @wire(getBoatTypes)
@@ -36,15 +27,16 @@ export default class BoatSearchForm extends LightningElement {
   // Fires event that the search option has changed.
   // passes boatTypeId (value of this.selectedBoatTypeId) in the detail
   handleSearchOptionChange(event) {
-    // Prevents the anchor element from navigating to a URL.
-    // event.preventDefault();
-
     this.selectedBoatTypeId = event.detail.value;
+    // console.log('inside bsf-handleSearchOptionChanges', event.detail.value);
+    // console.log('inside bsf-handleSearchOptionChanges-selectedBoatTypeId', this.selectedBoatTypeId);
 
     // Create the const searchEvent
     // searchEvent must be the new custom event search
     const searchEvent = new CustomEvent("search", {
-      boatTypeId: event.detail.value
+      detail: {
+        boatTypeId: this.selectedBoatTypeId
+      }
     });
     this.dispatchEvent(searchEvent);
   }

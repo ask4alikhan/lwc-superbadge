@@ -1,3 +1,13 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-25-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   01-25-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
 <template>
     <div onclick={selectBoat} class={tileClass}>
         <div style={backgroundStyle} class="tile"></div>
@@ -6,18 +16,20 @@
             <template if:true={boat}>
                 <lightning-layout vertical-align="center">
                     <lightning-layout-item padding="around-small">
-                        <p>{boat.Name}</p>
-                        <p>{boat.Contact__r.Name}</p>
-                        <p>
-                            <lightning-formatted-number value={boat.Price__c} format-style="currency"
-                                currency-code="USD" currency-display-as="symbol">
+                        <h1 class="slds-truncate slds-text-heading_medium">{boat.Name}</h1>
+                        <h2 class="slds-truncate slds-text-heading_small">{boat.Contact__r.Name}</h2>
+                        <div class="slds-text-body_small">
+                            <lightning-formatted-number label="Price" value={boat.Price__c} format-style="currency"
+                                currency-code="USD" currency-display-as="symbol" maximum-fraction-digits="2">
                             </lightning-formatted-number>
-                        </p>
-                        <p>
-                            <lightning-formatted-number value={boat.Length__c} maximum-fraction-digits="2">
+                        </div>
+                        <div class="slds-text-body_small">
+                            <lightning-formatted-number label="Length" value={boat.Length__c} maximum-fraction-digits="2">
                             </lightning-formatted-number>
-                        </p>
-                        <p>{boat.BoatType__r.Name}</p>
+                        </div>
+                        <div class="slds-text-body_small">
+                            Type: {boat.BoatType__r.Name}
+                        </div>
                     </lightning-layout-item>
                 </lightning-layout>
             </template>

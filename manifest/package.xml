@@ -26,6 +26,7 @@
     </types>
     <types>
         <members>*</members>
+        <members>boatMap</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
