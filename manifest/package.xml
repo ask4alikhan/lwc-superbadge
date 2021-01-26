@@ -26,6 +26,7 @@
     </types>
     <types>
         <members>*</members>
+        <members>fiveStarRating</members>
         <members>boatMap</members>
         <name>LightningComponentBundle</name>
     </types>

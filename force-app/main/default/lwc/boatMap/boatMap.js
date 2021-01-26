@@ -1,7 +1,6 @@
-// import BOATMC from the message channel
-import { APPLICATION_SCOPE, subscribe, publish, MessageContext } from 'lightning/messageService';
 import BoatMC from '@salesforce/messageChannel/BoatMessageChannel__c';
-import { LightningElement, wire, api} from 'lwc';
+import { APPLICATION_SCOPE, subscribe, publish, MessageContext } from 'lightning/messageService';
+import { LightningElement, wire, api, track} from 'lwc';
 import {getRecord} from  "lightning/uiRecordApi";
 
 // import BOAT_OBJECT from '@salesforce/schema/Boat__c';
@@ -76,7 +75,14 @@ export default class BoatMap extends LightningElement {
 
   // Creates the map markers array with the current boat's location for the map.
   updateMap(Longitude, Latitude) {
-    this.mapMarkers = [Longitude,Latitude];
+    // this.mapMarkers = [Longitude,Latitude];
+    this.mapMarkers = [{
+        location:
+        {
+          'Longitude': Longitude,
+          'Latitude': Latitude
+        }
+      }];
   }
 
   // Getter method for displaying the map component, or a helper method.

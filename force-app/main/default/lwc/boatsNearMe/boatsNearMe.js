@@ -17,11 +17,10 @@ export default class BoatsNearMe extends LightningElement {
 
     @wire(getBoatsByLocation, { latitude: '$latitude', longitude: '$longitude', boatTypeId: '$boatTypeId' })
     wiredBoatsJSON({ error, data }) {
-        
+        console.log('wiredBoatsJSOn: boattypeid : data : error', this.boatTypeId, data, error);
         if (data) {
             this.isLoading = true;
             this.createMapMarkers(JSON.parse(data));
-            
         } else if (error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -30,7 +29,7 @@ export default class BoatsNearMe extends LightningElement {
                     variant: ERROR_VARIANT
                 })
             );
-           // this.isLoading = false;
+           this.isLoading = false;
         }
     }
 
@@ -66,13 +65,14 @@ export default class BoatsNearMe extends LightningElement {
         });
 
         this.mapMarkers = newMarkers;
+        console.log('createMapMarkers :: this.mapMarkers', this.mapMarkers);
         this.isLoading = false;
-
     }
 
     renderedCallback() {
         if (this.isRendered == false) {
             this.getLocationFromBrowser();
+            console.log
         }
         this.isRendered = true;
     }

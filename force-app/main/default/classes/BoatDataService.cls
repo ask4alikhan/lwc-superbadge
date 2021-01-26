@@ -92,7 +92,7 @@ public class BoatDataService {
         if (String.isNotBlank(boatTypeId)) {
             query += 'WHERE BoatType__c = :boatTypeId ';
         }
-        query += ' WITH SECURITY_ENFORCED ORDER BY DISTANCE(Geolocation__c, GEOLOCATION(:latitude, :longitude), \'mi\') LIMIT 10';
+        // query += ' WITH SECURITY_ENFORCED ORDER BY DISTANCE(Geolocation__c, GEOLOCATION(:latitude, :longitude), \'mi\') LIMIT 10';
         return JSON.serialize(Database.query(query));
     }
 
